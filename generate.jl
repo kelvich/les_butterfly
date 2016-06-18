@@ -70,14 +70,17 @@ end
 
 # println(momentumX(0.1, 95))
 
-n_particles = 10000
+n_particles = 100000
 
 particles = Array{Float64}(n_particles, 4)
 
 # @parallel
 for i = 1:n_particles
-  t0, v0 = generate_electron()
-  particles[i, :] = momentum(v0, t0)
+    if i % 1000 == 0
+        print("1k more\n")
+    end
+    t0, v0 = generate_electron()
+    particles[i, :] = momentum(v0, t0)
 end
 
 h5write("results.h5", "particles", particles)
