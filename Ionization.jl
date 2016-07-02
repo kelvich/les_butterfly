@@ -1,6 +1,4 @@
 #!/usr/bin/env julia
-using ODE
-using HDF5
 
 omega = 0.0228
 amp = 0.0655
@@ -63,7 +61,7 @@ function generate(n)
     particles[i, :] = momentum(v0, t0)
   end
   fname = "results" * string(rand()) * ".h5"
-  h5write(fname, "particles", particles)
+  HDF5.h5write(fname, "particles", particles)
   print("Written $n rows to $fname\n")
 end
 
